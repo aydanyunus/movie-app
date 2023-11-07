@@ -7,23 +7,58 @@
 *,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   font-family: "Open Sans", sans-serif;
+  font-style: normal;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1170px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
-a {
+a,
+a:focus-visible {
   text-decoration: none;
 }
 
 a:visited,
-a:active {
+a:active,
+a:focus-visible {
   color: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+  .container {
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .container {
+    max-width: 575px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .container {
+    max-width: 1170px;
+  }
 }
