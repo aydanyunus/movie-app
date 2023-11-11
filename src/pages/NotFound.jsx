@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../assets/styles/error.scss";
 
 const NotFound = () => {
   return (

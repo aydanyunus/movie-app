@@ -1,7 +1,7 @@
 .wrapper {
   height: 100vh;
-  background: #0f1115;
-  color: #fff;
+  background: $main-bg;
+  color: $white-color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,8 +22,8 @@
     .error-btn {
       margin-top: 25px;
       text-transform: uppercase;
-      color: #fff;
-      background-color: #01c79b;
+      color: $white-color;
+      background-color: $icon-color;
       border: none;
       border-radius: 30px;
       cursor: pointer;

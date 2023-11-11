@@ -3,7 +3,6 @@ import { BiSolidCameraMovie } from "react-icons/bi";
 import { NavLink, Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
-import "./header.scss";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(true);
