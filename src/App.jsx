@@ -1,34 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
-import Header from "./components/header/Header";
 import NotFound from "./pages/NotFound";
+import Layout from "./components/Layout";
+import "./assets/styles/main.scss";
 
 const App = () => {
-  useEffect(() => {
-    console.log("first");
-  });
-
   return (
     <>
       <Routes>
         <Route
           path="/"
           element={
-            <>
-              <Header />
+            <Layout>
               <Home />
-            </>
+            </Layout>
           }
         />
         <Route
           path="/favorites"
           element={
-            <>
-              <Header />
+            <Layout>
               <Favorites />
-            </>
+            </Layout>
           }
         />
         <Route path="/*" element={<NotFound />} />

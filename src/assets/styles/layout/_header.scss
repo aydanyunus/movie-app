@@ -1,6 +1,6 @@
 .header {
   padding: 15px 0;
-  background: #0f1115;
+  background: $main-bg;
   &__wrapper {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
@@ -18,11 +18,11 @@
           &:visited,
           &:active {
             svg {
-              fill: #01c79b;
+              fill: $icon-color;
             }
           }
           svg {
-            fill: #01c79b;
+            fill: $icon-color;
           }
         }
       }
@@ -30,14 +30,14 @@
         width: 350px;
         &--input,
         &--mobile-input {
-          background: #19181f;
+          background: $input-bg;
           width: 100%;
           padding: 15px;
           border: none;
           border-radius: 25px;
           outline: none;
           font-size: 16px;
-          color: #fff;
+          color: $white-color;
           &::-webkit-search-cancel-button {
             display: none;
           }
@@ -61,10 +61,10 @@
         display: flex;
         column-gap: 18px;
         a {
-          color: #6f7072;
+          color: $text-gray-color;
           font-size: 18px;
           &:active {
-            color: white;
+            color: $white-color;
           }
         }
       }
@@ -78,7 +78,7 @@
           align-items: center;
           justify-content: center;
           svg {
-            color: #01c79b;
+            color: $icon-color;
           }
         }
       }
@@ -86,7 +86,7 @@
   }
   .menu__wrapper {
     padding: 20px 0;
-    background: #0f1115;
+    background: $main-bg;
     .menu__items {
       width: 100%;
       display: flex;
@@ -95,9 +95,9 @@
       row-gap: 25px;
       .item {
         a {
-          color: #6f7072;
+          color: $text-gray-color;
           &:active {
-            color: white;
+            color: $white-color;
           }
         }
       }
