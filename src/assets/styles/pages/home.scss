@@ -1,0 +1,95 @@
+.page__wrapper {
+  background: $bg-color;
+  height: 100%;
+  .page__content {
+    padding: 40px 0;
+
+    .page__header {
+      display: flex;
+      justify-content: space-between;
+      .page__title {
+        color: $white-color;
+        font-size: 28px;
+        font-weight: 600;
+      }
+      .seemore__btn {
+        text-transform: capitalize;
+        font-size: 16px;
+        color: $text-gray-color;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+      }
+    }
+
+    .item__wrapper {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: 25px;
+      row-gap: 25px;
+      .item {
+        padding: 10px;
+        img {
+          max-width: 100%;
+          border-radius: 8px;
+        }
+        .details {
+          margin-top: 20px;
+          .item__title {
+            color: $white-color;
+            text-transform: capitalize;
+            font-size: 20px;
+            font-weight: 500;
+          }
+          .rating {
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            svg {
+              font-size: 18px;
+              fill: $star-color;
+            }
+            .imdb {
+              margin-left: 5px;
+              color: $text-gray-color;
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+  .page__wrapper {
+    .page__content {
+      .page__header {
+        flex-direction: column;
+        justify-content: center;
+        .page__title {
+          font-size: 22px;
+          margin-bottom: 20px;
+        }
+      }
+      .item__wrapper {
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 15px;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .page__wrapper {
+    .page__content {
+      .item__wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 15px;
+      }
+    }
+  }
+}
