@@ -2,6 +2,7 @@ import React from "react";
 import ContentList from "../components/content/ContentList";
 
 const Home = () => {
+
   return (
     <>
       <div className="page__wrapper">
