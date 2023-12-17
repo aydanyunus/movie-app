@@ -58,6 +58,14 @@
               font-weight: 600;
             }
           }
+          .item__year {
+            color: $white-color;
+            text-transform: capitalize;
+            text-decoration: underline;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 5px;
+          }
         }
       }
     }

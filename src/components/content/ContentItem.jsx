@@ -1,19 +1,22 @@
-import React from 'react'
+import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
-const ContentItem = () => {
+const ContentItem = ({ movie }) => {
   return (
     <div className="item">
-    <img src="../../../public/poster.jpg" alt="img" />
-    <div className="details">
-      <h5 className="item__title">title</h5>
-      <div className="rating">
-        <AiFillStar />
-        <span className="imdb">7.0</span>
+      <img src={`${movie.Poster}`} alt="img" />
+      <div className="details">
+        <h5 className="item__title">{movie.Title}</h5>
+        <div className="rating">
+          <AiFillStar />
+          <span className="imdb">7.0</span>
+        </div>
+        <h6 className="item__year">
+          <span>{movie.Year}</span>
+        </h6>
       </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default ContentItem
+export default ContentItem;
