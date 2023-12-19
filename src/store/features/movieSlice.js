@@ -25,6 +25,23 @@ export const getMovies = createAsyncThunk('movie/getMovies', async () => {
       } 
 })
 
+export const getMoviesByQuery = createAsyncThunk('movie/getMoviesByQuery', async (q) => {
+  try {
+      const response = await fetch(`${`http://www.omdbapi.com/?s=${q}&apikey=df241cb3`}`, {
+        method: 'GET',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error');
+      }
+  
+      const responseData = await response.json();
+      return responseData.Search;
+    } catch (error) {
+      throw error;
+    } 
+})
+
 
 export const movieSlice = createSlice({
     name: 'movie',
@@ -45,6 +62,19 @@ export const movieSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message || null;
             })
+            .addCase(getMoviesByQuery.pending, (state) => {
+              state.loading = true;
+              state.error = false;
+          })
+          .addCase(getMoviesByQuery.fulfilled, (state, action) => {
+              state.movies = action.payload
+              state.loading = false;
+              state.error = false;
+          })
+          .addCase(getMoviesByQuery.rejected, (state) => {
+              state.loading = false;
+              state.error = action.error.message || null;
+          })
     }
 })
 
