@@ -3,9 +3,25 @@ import { BiSolidCameraMovie } from "react-icons/bi";
 import { NavLink, Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { getMoviesByQuery } from "../../store/features/movieSlice";
 
 const Header = () => {
+  const dispatch = useDispatch()
   const [mobileMenu, setMobileMenu] = useState(true);
+  const [text, setText] = useState('');
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    await dispatch(getMoviesByQuery(text))
+    setText('')
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
 
   return (
     <header className="header">
@@ -18,16 +34,21 @@ const Header = () => {
               </Link>
             </div>
             <div className="header__search">
+            <form onSubmit={handleSubmit}>
               <input
                 className="header__search--input"
                 type="search"
                 placeholder="Search any movies or TV shows"
+                value={text}
+                onChange={(e)=>setText(e.target.value)}
+                onKeyDown={handleKeyDown}
               />
                <input
                 className="header__search--mobile-input"
                 type="search"
                 placeholder="Search"
               />
+                </form>
             </div>
           </div>
 
