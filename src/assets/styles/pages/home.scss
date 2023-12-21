@@ -31,40 +31,69 @@
       row-gap: 25px;
       .item {
         padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        &:hover {
+          background: rgba(#000000, 0.5);
+          border-radius: 8px;
+          .flex {
+            .like-btn {
+              display: flex;
+            }
+          }
+        }
         img {
           max-width: 100%;
           border-radius: 8px;
         }
-        .details {
+        .flex {
+          display: flex;
+          justify-content: space-between;
           margin-top: 20px;
-          .item__title {
-            color: $white-color;
-            text-transform: capitalize;
-            font-size: 20px;
-            font-weight: 500;
+          .details {
+            .item__title {
+              max-width: 200px;
+              color: $white-color;
+              text-transform: capitalize;
+              font-size: 20px;
+              font-weight: 500;
+            }
+            .rating {
+              margin-top: 5px;
+              display: flex;
+              align-items: center;
+              svg {
+                font-size: 18px;
+                fill: $star-color;
+              }
+              .imdb {
+                margin-left: 5px;
+                color: $text-gray-color;
+                font-size: 16px;
+                font-weight: 600;
+              }
+            }
+            .item__year {
+              color: $white-color;
+              text-transform: capitalize;
+              text-decoration: underline;
+              font-size: 14px;
+              font-weight: 500;
+              margin-top: 5px;
+            }
           }
-          .rating {
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
+          .like-btn {
+            display: none;
+            cursor: pointer;
+            align-items: baseline;
+            justify-content: center;
+            background: none;
+            border: none;
             svg {
-              font-size: 18px;
-              fill: $star-color;
+              font-size: 24px;
+              fill: $white-color;
             }
-            .imdb {
-              margin-left: 5px;
-              color: $text-gray-color;
-              font-size: 16px;
-              font-weight: 600;
-            }
-          }
-          .item__year {
-            color: $white-color;
-            text-transform: capitalize;
-            text-decoration: underline;
-            font-size: 14px;
-            font-weight: 500;
-            margin-top: 5px;
           }
         }
       }
