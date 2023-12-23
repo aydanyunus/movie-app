@@ -57,8 +57,8 @@ export const getMoviesByQuery = createAsyncThunk('movie/getMoviesByQuery', async
   }
 })
 
-export const toggleFavorite = createAsyncThunk("movie/toggleFavorite", async (movieId) => {
-  return movieId;
+export const toggleFavorite = createAsyncThunk("movie/toggleFavorite", async (movie) => {
+  return movie;
 });
 
 
@@ -100,15 +100,15 @@ export const movieSlice = createSlice({
         state.error = false;
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
-        const movieId = action.payload;
-        const selectedMovie = state.movies?.map((m) => m.imdbID === movieId);
-        if (selectedMovie) {
-          if (state.favorites.includes(movieId)) {
-            state.favorites = state.favorites.filter((id) => id !== movieId);
-          } else {
-            state.favorites.push(movieId);
-          }
+        const movie = action.payload;
+        const isFavorite = state.favorites.some((m) => m.imdbID === movie.imdbID);
+
+        if (isFavorite) {
+          state.favorites = state.favorites.filter((m) => m.imdbID !== movie.imdbID);
+        } else {
+          state.favorites.push(movie);
         }
+
         state.loading = false;
         state.error = false;
 

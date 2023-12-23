@@ -7,10 +7,10 @@ import { toggleFavorite } from "../../store/features/movieSlice";
 const ContentItem = ({ movie }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.movie.favorites);
-  const isInFav = favorites.find((mId) => mId === movie.imdbID);
+  const isInFav = favorites.find((m) => m.imdbID === movie.imdbID);
 
-  const handleFav = async (movieId) => {
-    await dispatch(toggleFavorite(movieId));
+  const handleFav = async (movie) => {
+    await dispatch(toggleFavorite(movie));
   };
 
   return (
@@ -30,7 +30,7 @@ const ContentItem = ({ movie }) => {
         <button
           className="like-btn"
           type="button"
-          onClick={() => handleFav(movie.imdbID)}
+          onClick={() => handleFav(movie)}
         >
           {isInFav ? <FaHeart /> : <FaRegHeart />}
         </button>
