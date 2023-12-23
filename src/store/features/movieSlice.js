@@ -1,11 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const getFromLocal = (key) => {
+  const localData = localStorage.getItem(key);
+
+  try {
+    const parsedData = JSON.parse(localData)
+    return parsedData || [];
+  }
+  catch (e) {
+    return []
+  }
+
+}
+
 const initialState = {
   movies: [],
-  favorites: [],
+  favorites: getFromLocal('favorites'),
   error: null,
   loading: false
 }
+
 
 const BASE_URL = `http://www.omdbapi.com/?s=Batman&apikey=df241cb3`;
 
@@ -97,6 +111,9 @@ export const movieSlice = createSlice({
         }
         state.loading = false;
         state.error = false;
+
+        localStorage.setItem("favorites", JSON.stringify(state.favorites));
+
       })
       .addCase(toggleFavorite.rejected, (state) => {
         state.loading = false;
