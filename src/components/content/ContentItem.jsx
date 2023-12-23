@@ -1,8 +1,18 @@
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleFavorite } from "../../store/features/movieSlice";
 
 const ContentItem = ({ movie }) => {
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.movie.favorites);
+  const isInFav = favorites.find((mId) => mId === movie.imdbID);
+
+  const handleFav = async (movieId) => {
+    await dispatch(toggleFavorite(movieId));
+  };
+
   return (
     <div className="item">
       <img src={`${movie.Poster}`} alt="img" className="item-img" />
@@ -17,8 +27,12 @@ const ContentItem = ({ movie }) => {
             <span>{movie.Year}</span>
           </h6>
         </div>
-        <button className="like-btn" type="button">
-          <FaRegHeart />
+        <button
+          className="like-btn"
+          type="button"
+          onClick={() => handleFav(movie.imdbID)}
+        >
+          {isInFav ? <FaHeart /> : <FaRegHeart />}
         </button>
       </div>
     </div>
