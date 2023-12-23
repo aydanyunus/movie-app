@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
+import ContentItem from "../components/content/ContentItem";
+import { useSelector } from "react-redux";
 
 const Favorites = () => {
-  return (
-    <div>Favorites</div>
-  )
-}
+  const favorites = useSelector((state) => state.movie.favorites);
 
-export default Favorites
+  return (
+    <div className="page__wrapper">
+      <div className="container">
+        <div className="page__content">
+          <div className="item__wrapper">
+            {favorites &&
+              favorites.map((m) => <ContentItem movie={m} key={m.imdbID} />)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Favorites;
