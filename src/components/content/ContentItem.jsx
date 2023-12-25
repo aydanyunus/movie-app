@@ -7,7 +7,15 @@ import { toggleFavorite } from "../../store/features/movieSlice";
 const ContentItem = ({ movie }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.movie.favorites);
-  const isInFav = favorites.find((m) => m.imdbID === movie.imdbID);
+  const isInFav = favorites.find((m) => m.id === movie.id);
+  const date = movie.release_date || movie.first_air_date;
+  let formattedDate;
+
+  if (date) {
+    formattedDate = date.split("-")[0];
+  } else {
+    formattedDate= 'N/A'
+  }
 
   const handleFav = async (movie) => {
     await dispatch(toggleFavorite(movie));
@@ -15,16 +23,22 @@ const ContentItem = ({ movie }) => {
 
   return (
     <div className="item">
-      <img src={`${movie.Poster}`} alt="img" className="item-img" />
+      <img
+        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+        alt="img"
+        className="item-img"
+      />
       <div className="flex">
         <div className="details">
-          <h5 className="item__title">{movie.Title}</h5>
+          <h5 className="item__title">
+            {movie.original_title ? movie.original_title : movie.name}
+          </h5>
           <div className="rating">
             <AiFillStar />
-            <span className="imdb">7.0</span>
+            <span className="imdb">{Math.floor(movie.vote_average *10)/10}</span>
           </div>
           <h6 className="item__year">
-            <span>{movie.Year}</span>
+            <span>{formattedDate}</span>
           </h6>
         </div>
         <button

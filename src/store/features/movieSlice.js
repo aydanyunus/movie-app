@@ -20,12 +20,12 @@ const initialState = {
   loading: false
 }
 
+const BASE_URL = `https://api.themoviedb.org/3`;
+const api_key = '24f592bac1516766ed11a1b60eaa44db';
 
-const BASE_URL = `https://www.omdbapi.com/?s=Batman&apikey=df241cb3`;
-
-export const getMovies = createAsyncThunk('movie/getMovies', async () => {
+export const getWeeklyMovies = createAsyncThunk('movie/getWeeklyMovies', async () => {
   try {
-    const response = await fetch(`${BASE_URL}`, {
+    const response = await fetch(`${BASE_URL}/trending/movie/week?api_key=${api_key}`, {
       method: 'GET',
     });
 
@@ -34,7 +34,42 @@ export const getMovies = createAsyncThunk('movie/getMovies', async () => {
     }
 
     const responseData = await response.json();
-    return responseData.Search;
+    console.log(responseData)
+    return responseData.results;
+  } catch (error) {
+    throw error;
+  }
+})
+
+export const getAllMovies = createAsyncThunk('movie/getAllMovies', async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/discover/movie?api_key=${api_key}`, {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error');
+    }
+
+    const responseData = await response.json();
+    return responseData.results;
+  } catch (error) {
+    throw error;
+  }
+})
+
+export const getAllTvShows = createAsyncThunk('movie/getAllTvShows', async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/discover/tv?api_key=${api_key}`, {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error');
+    }
+
+    const responseData = await response.json();
+    return responseData.results;
   } catch (error) {
     throw error;
   }
@@ -42,7 +77,7 @@ export const getMovies = createAsyncThunk('movie/getMovies', async () => {
 
 export const getMoviesByQuery = createAsyncThunk('movie/getMoviesByQuery', async (q) => {
   try {
-    const response = await fetch(`${`https://www.omdbapi.com/?s=${q}&apikey=df241cb3`}`, {
+    const response = await fetch(`${BASE_URL}/search/movie?api_key=${api_key}&query=${q}`, {
       method: 'GET',
     });
 
@@ -51,7 +86,7 @@ export const getMoviesByQuery = createAsyncThunk('movie/getMoviesByQuery', async
     }
 
     const responseData = await response.json();
-    return responseData.Search;
+    return responseData.results;
   } catch (error) {
     throw error;
   }
@@ -69,16 +104,42 @@ export const movieSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getMovies.pending, (state) => {
+      .addCase(getWeeklyMovies.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(getMovies.fulfilled, (state, action) => {
+      .addCase(getWeeklyMovies.fulfilled, (state, action) => {
         state.movies = action.payload
         state.loading = false;
         state.error = false;
       })
-      .addCase(getMovies.rejected, (state) => {
+      .addCase(getWeeklyMovies.rejected, (state) => {
+        state.loading = false;
+        state.error = action.error.message || null;
+      })
+      .addCase(getAllMovies.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getAllMovies.fulfilled, (state, action) => {
+        state.movies = action.payload
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(getAllMovies.rejected, (state) => {
+        state.loading = false;
+        state.error = action.error.message || null;
+      })
+      .addCase(getAllTvShows.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getAllTvShows.fulfilled, (state, action) => {
+        state.movies = action.payload
+        state.loading = false;
+        state.error = false;
+      })
+      .addCase(getAllTvShows.rejected, (state) => {
         state.loading = false;
         state.error = action.error.message || null;
       })
@@ -101,10 +162,10 @@ export const movieSlice = createSlice({
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
         const movie = action.payload;
-        const isFavorite = state.favorites.some((m) => m.imdbID === movie.imdbID);
+        const isFavorite = state.favorites.some((m) => m.id === movie.id);
 
         if (isFavorite) {
-          state.favorites = state.favorites.filter((m) => m.imdbID !== movie.imdbID);
+          state.favorites = state.favorites.filter((m) => m.id !== movie.id);
         } else {
           state.favorites.push(movie);
         }

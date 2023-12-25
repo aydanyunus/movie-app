@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ContentItem from "./ContentItem";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovies } from "../../store/features/movieSlice";
+import { getWeeklyMovies } from "../../store/features/movieSlice";
 
 const ContentList = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const ContentList = () => {
   const movies = useSelector((state) => state.movie.movies);
 
   useEffect(() => {
-    dispatch(getMovies());
+    dispatch(getWeeklyMovies());
   }, [dispatch]);
 
   return (
@@ -18,7 +18,7 @@ const ContentList = () => {
         <p>Loading...</p>
       ) : (
         movies &&
-        movies.map((movie) => <ContentItem movie={movie} key={movie.imdbID} />)
+        movies.map((movie) => <ContentItem movie={movie} key={movie.id} />)
       )}
     </div>
   );

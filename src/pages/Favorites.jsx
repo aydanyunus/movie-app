@@ -9,9 +9,12 @@ const Favorites = () => {
     <div className="page__wrapper">
       <div className="container">
         <div className="page__content">
+        <div className="page__header">
+            <h1 className="page__title">Favorites</h1>
+          </div>
           <div className="item__wrapper">
             {favorites &&
-              favorites.map((m) => <ContentItem movie={m} key={m.imdbID} />)}
+              favorites.map((m) => <ContentItem movie={m} key={m.id} />)}
           </div>
         </div>
       </div>

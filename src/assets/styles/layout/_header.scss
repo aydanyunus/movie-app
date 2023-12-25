@@ -63,9 +63,10 @@
         a {
           color: $text-gray-color;
           font-size: 18px;
-          &:active {
-            color: $white-color;
-          }
+        }
+        .active {
+          color: $white-color;
+
         }
       }
       .mobile__menu {
