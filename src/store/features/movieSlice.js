@@ -21,7 +21,7 @@ const initialState = {
 }
 
 
-const BASE_URL = `http://www.omdbapi.com/?s=Batman&apikey=df241cb3`;
+const BASE_URL = `https://www.omdbapi.com/?s=Batman&apikey=df241cb3`;
 
 export const getMovies = createAsyncThunk('movie/getMovies', async () => {
   try {
@@ -42,7 +42,7 @@ export const getMovies = createAsyncThunk('movie/getMovies', async () => {
 
 export const getMoviesByQuery = createAsyncThunk('movie/getMoviesByQuery', async (q) => {
   try {
-    const response = await fetch(`${`http://www.omdbapi.com/?s=${q}&apikey=df241cb3`}`, {
+    const response = await fetch(`${`https://www.omdbapi.com/?s=${q}&apikey=df241cb3`}`, {
       method: 'GET',
     });
 
