@@ -4,7 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { getMoviesByQuery } from "../../store/features/movieSlice";
+import { getMoviesByQuery, getWeeklyMovies } from "../../store/features/movieSlice";
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -13,8 +13,11 @@ const Header = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await dispatch(getMoviesByQuery(text))
-    setText('')
+    if (text.trim() !== '') {
+      await dispatch(getMoviesByQuery(text));
+    } else {
+      await dispatch(getWeeklyMovies())
+    }
   }
 
   const handleKeyDown = (e) => {
