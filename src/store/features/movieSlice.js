@@ -21,7 +21,7 @@ const initialState = {
 }
 
 const BASE_URL = `https://api.themoviedb.org/3`;
-const api_key = '24f592bac1516766ed11a1b60eaa44db';
+const api_key = import.meta.env.VITE_APP_TMDB_API_KEY;
 
 export const getWeeklyMovies = createAsyncThunk('movie/getWeeklyMovies', async () => {
   try {
